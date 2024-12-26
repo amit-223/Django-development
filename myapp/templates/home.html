@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <div class="container" style='text-align: center;'>
+    {% include 'navbar.html'%}
+
+    <h1>This is our Website</h1>
+        
+    <form action="/home/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="check">
+    <button>send</button>
+    </form>
+
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni commodi corrupti accusantium soluta error, obcaecati ipsa voluptate reprehenderit excepturi nisi tempore similique odit nam officiis repellendus voluptates ullam consequuntur! Impedit.</p>
+    <button>contact us</button>
+
+    <!-- accesing dynamic value -->
+     {% if isactive %}
+   <div>
+    <h1>Date is {{d}}</h1>
+    <h2>Name is {{name}}</h2>
+    <h3>Student {{student}}</h3>
+    {% endif %}
+   </div> 
+</div>
+</body>
+</html>
