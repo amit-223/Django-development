@@ -1,3 +1,9 @@
+#"pip install django" --> django installment command
+#initial code 
+# django-admin startproject myapp --> it create files like, manage.py
+# python manage.py runserver --> it gives url, django have internal server
+
+
 from django.http import HttpResponse
 import datetime
 from django.shortcuts import render
