@@ -19,13 +19,13 @@ def home(request):
         #     isactive=True
 
     d= datetime.datetime.now()
-    isactive=True
-    name="Amit Karmakar"
-    student={'sname':"Prothom", 'sid':"15"}
-    data={'isactive':isactive, 'd':d,'name':name, 'student':student}
+    # isactive=True
+    # name="Amit Karmakar"
+    # student={'sname':"Prothom", 'sid':"15"}
+    # data={'isactive':isactive, 'd':d,'name':name, 'student':student}
     # print("test func is call from view")
     # return HttpResponse("<h1>Index Page </h1>" +str(d))
-    return render(request,"home.html",data)
+    return render(request,"home.html")
 
 def about(request):
     # return HttpResponse("<h1>About page </h1>")

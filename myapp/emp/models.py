@@ -2,14 +2,14 @@ from django.db import models
 
 # Create your models here.
 class Emp(models.Model):
+    id = models.AutoField(primary_key=True)
     name=models.CharField(max_length=200)
-    empid=models.CharField(max_length=200)
-    phone=models.CharField(max_length=10,null=False, blank=False)
+    phone=models.CharField(max_length=10)
     working=models.BooleanField(default=True)
-    department=models.CharField(max_length=200)
+    # department=models.CharField(max_length=200)
 
-def __str__(self):
-    return self.name
+# def __str__(self):
+#     return self.name
 
 # class EmpTestimonial(models.Model):
 #     # Your existing fields
