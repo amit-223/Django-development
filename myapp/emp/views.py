@@ -26,10 +26,11 @@ def add_emp(request):
         return redirect("/emp/home/")
     return render(request,"emp/add_emp.html",{})
 
-# def del_emp(request,id):
-#     e_id = Emp.objects.get(id)
-#     e_id.delete()
-#     return redirect('/emp/home/')
+def del_emp(request,e_id):
+    e = Emp.objects.get(id=e_id)
+    print(e)
+    e.delete()
+    return redirect('/emp/home/')
 
 
     #data fetch
