@@ -8,6 +8,9 @@ class Emp(models.Model):
     working=models.BooleanField(default=True)
     # department=models.CharField(max_length=200)
 
+class Feedback(models.Model):
+    name = models.CharField(max_length=100)
+    message = models.CharField(max_length=200)
 # def __str__(self):
 #     return self.name
 

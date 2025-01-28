@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Emp
+from .models import Emp, Feedback
 from .models import Testimonial
 from .forms import Feedbackform
 
@@ -10,6 +10,10 @@ def empfunc(request):
     # return render(request, "emp/home.html",{})
     emps=Emp.objects.all()
     return render(request, "emp/home.html",{'emps' : emps})
+
+def ffunc(request): 
+    feed = Feedback.objects.all()
+    return render(request,'emp/home.html', { 'feed' : feed})
 
 def add_emp(request):
     if request.method=="POST":
@@ -65,9 +69,13 @@ def testimonials(request):
     })
 def feedback(request):
     if request.method == 'POST':
-        pass
-    else:
-        f=Feedbackform()
-        return render(request, "emp/feedback.html",{
-            'f':f
-        })
+        print('ok')
+        # name = request.POST['name'] 
+        f = Feedback()
+        f.name = request.POST.get('name')
+        f.message= request.POST.get('message')
+        
+        # feedback = request.POST['feedback']
+        Feedback.objects.create(name=f.name, message=f.message) 
+        return redirect("/emp/home/")
+    return render(request, "emp/feedback.html",{})

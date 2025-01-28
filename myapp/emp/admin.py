@@ -5,9 +5,8 @@ from .models import Emp,Testimonial
 
 
 class Empadmin(admin.ModelAdmin):
-    list_display=('name','working','id','phone')
+    list_display=('name','id','phone')
     search_fields=('name','phone')
-    list_filter=('working',)
 
 admin.site.register(Emp, Empadmin)
 admin.site.register(Testimonial)
