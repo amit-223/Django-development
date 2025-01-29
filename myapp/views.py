@@ -34,3 +34,9 @@ def about(request):
 def service(request):
     # return HttpResponse("<h1>Service page </h1>")   
     return render(request,"service.html",{})
+
+def test1(request):
+    return render(request, 'test1.html' ,{})
+
+def test2(request):
+    return render(request, 'test2.html' ,{})

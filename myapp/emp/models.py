@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 class Emp(models.Model):
@@ -22,9 +23,9 @@ class Feedback(models.Model):
 class Testimonial(models.Model):
     name=models.CharField(max_length=200)
     testimonial=models.TextField()
+    rating=models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], default=3)
+  
     # picture=models.ImageField(upload_to='testimonial/')
-    picture = models.ImageField(upload_to='pictures/', null=True, blank=True)
-    # rating=models.IntegerField()
-    def __str__(self):
-        return self.testimonial
+    # picture = models.ImageField(upload_to='pictures/', null=True, blank=True)
+    
     

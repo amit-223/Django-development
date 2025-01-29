@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Emp, Feedback
-from .models import Testimonial
+from .models import Emp, Feedback, Testimonial
 from .forms import Feedbackform
 
 # Create your views here.
@@ -9,11 +8,9 @@ def empfunc(request):
     # return  HttpResponse("Emp Homepage")
     # return render(request, "emp/home.html",{})
     emps=Emp.objects.all()
-    return render(request, "emp/home.html",{'emps' : emps})
-
-def ffunc(request): 
-    feed = Feedback.objects.all()
-    return render(request,'emp/home.html', { 'feed' : feed})
+    feedbacks = Feedback.objects.all()
+    return render(request, "emp/home.html",{'emps' : emps, 'feedbacks': feedbacks,})
+   
 
 def add_emp(request):
     if request.method=="POST":
@@ -34,40 +31,21 @@ def del_emp(request,e_id):
     e = Emp.objects.get(id=e_id)
     print(e)
     e.delete()
-    return redirect('/emp/home/')
-
-
-    #data fetch
-        # emp_name= request.POST.get("emp_name")
-        # emp_id= request.POST.get("emp_id")
-        # emp_phone= request.POST.get("emp_phone")
-        # emp_department= request.POST.get("emp_department")
-        # emp_working= request.POST.get("emp_working")
-     
-        #create model object & set the data
-        # e=Emp()
-        # e.name=emp_name
-        # e.empid=emp_id
-        # e.phone=emp_phone
-        # e.department=emp_department
-        # if emp_working is None:
-        #     e.working=False  
-        # else:
-        #     e.working=True
-        # e.save()
-    
-        
-
-
-
-        
+    return redirect('/emp/home/') 
 
 def testimonials(request):
-    t = Testimonial.objects.all()
-    return render(request, "emp/testimonials.html",{ 
-        t:t
-    })
+    if request.method == 'POST':
+        t = Testimonial()
+        t.name = request.POST['name']
+        t.testimonial = request.POST['testimonial'] 
+        t.rating = request.POST ['rating']
+        Testimonial.objects.create(name = t.name,testimonial=t.testimonial,rating=t.rating)
+        return redirect('/emp/home/')
+    return render(request, 'emp/testimonials.html')
+
 def feedback(request):
+    # Feedbacks are only deleted from admin for that, goto admin/feebacks/delete manually
+    
     if request.method == 'POST':
         print('ok')
         # name = request.POST['name'] 

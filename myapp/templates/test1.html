@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} 
+        Test1
+        {% endblock %}</title>
+</head>
+<body>
+    {% block content %}
+    
+    <h1 class="text-center my-3">Feedback</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+
+            <form method="post">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" placeholder=" Enter name" id='name' name="name">
+              </div>
+
+              <div class="mb-3">
+                <label for="message">Feedback</label>
+                <input type="text" class="form-control" placeholder=" Your feedback" id='message' name="message"
+                  required>
+              </div>
+
+              <div class="">
+                <button class="btn btn-primary">Submit</button>
+              </div>
+
+            </form>
+</div></div></div></div></div>
+    
+    {% endblock %}
+</body>
+</html>
