@@ -14,9 +14,21 @@
 <body>
   <!-- Navbar -->
   {% include 'emp/navbar.html' %}
-
+  <style>
+    .heading-style {
+      text-align: center;
+      margin: 1rem 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #007bff, #00ff88);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+  </style>
+  <h1 class="heading-style">Employee Management App</h1>
   <!-- Main Content -->
-  <h1 class="text-center my-3">Employee Management App</h1>
+
   <h2 class="text-center my-3">List of Employees</h2>
 
   <div class="container">
@@ -44,7 +56,7 @@
                   <td>
                     <a href="/emp/delete-emp/{{ e.id }}" class="btn btn-danger">Delete</a>
                     <!-- Uncomment the below button if Update functionality is implemented -->
-                    <!-- <button class="btn btn-dark">Update</button> -->
+                     <a href="/emp/update-emp/" class="btn btn-primary">Update</a>
                   </td>
                 </tr>
                 {% endfor %}
@@ -55,7 +67,7 @@
       </div>
     </div>
   </div>
-
+            {% comment %} Show all feedbacks to Home {% endcomment %}
             <h3 class="text-center my-3">Feedbacks</h3>
             <div class="container">
               <div class="row">
@@ -70,7 +82,8 @@
                 </tr>
               </thead>
               <tbody>
-                {% for fe in feedbacks %}
+                {% for fe in feedbacks %} 
+                {% comment %} feedbacks is came from views/emp_func which is passed through dictonary {% endcomment %}
                 <tr>
                   <td>{{ fe.name }}</td>
                   <td>{{ fe.message }}</td>
@@ -84,7 +97,7 @@
       </div>
     </div>
   </div>
-
+             {% comment %} Show all feedbacks to Home {% endcomment %}
         <h3 class ="text-center my-3">Testimonials</h3>
           <div class="container">
             <div class="row">
@@ -101,7 +114,8 @@
                       </thead>
 
                       <tbody>
-                        {% for test in testis %}
+                        {% for test in testimonials %}
+                         {% comment %} testimonials is came from views/emp_func which is passed through dictonary {% endcomment %}
                         <tr>
                           <td>{{ test.name }}</td>
                           <td>{{ test.testimonial }}</td>
@@ -110,9 +124,7 @@
                         {% endfor %}
                       </tbody>
                     </table>
-
-
-
+                    
                   </div>
                 </div>
               </div>

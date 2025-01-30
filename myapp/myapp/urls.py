@@ -16,17 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from views import *
+from views import *     # home, about & service funcctions are used
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #website urls --
     path('home/', home),
     path('about/',about),
     path('service/',service),
-    path('emp/',include('emp.urls')),
-    path('test1', test1, name='test1'),
-     path('test2', test2, name='test2'),
     
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    #by default the very first myapp url's be called, that's why route to emp's urls through include() function. 
+    path('emp/',include('emp.urls')),
+    
+    #testing
+    path('test1', test1, name='test1'),
+    path('test2', test2, name='test2'),
+] 

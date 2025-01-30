@@ -1,19 +1,16 @@
+#Employee management Application
 from django.shortcuts import render, redirect
 from .models import Emp, Feedback, Testimonial
-from .forms import Feedbackform
 
-# Create your views here.
-#Employee management App
 def empfunc(request):
-    # return  HttpResponse("Emp Homepage")
-    # return render(request, "emp/home.html",{})
     emps=Emp.objects.all()
     feedbacks = Feedback.objects.all()
-    return render(request, "emp/home.html",{'emps' : emps, 'feedbacks': feedbacks,})
+    testimonials = Testimonial.objects.all()
+    return render(request, "emp/home.html",{'emps' : emps, 'feedbacks': feedbacks,'testimonials' : testimonials})
+    #create object of classes & passed emps, feedbacks, testimonials to html through dictonary
    
-
 def add_emp(request):
-    if request.method=="POST":
+    if request.method=="POST": #user send post request 
            #data fetch from add_emp.html
         emp_id = request.POST.get('emp_id')
         emp_name = request.POST.get('emp_name')
@@ -35,25 +32,31 @@ def del_emp(request,e_id):
 
 def testimonials(request):
     if request.method == 'POST':
-        t = Testimonial()
-        t.name = request.POST['name']
-        t.testimonial = request.POST['testimonial'] 
-        t.rating = request.POST ['rating']
-        Testimonial.objects.create(name = t.name,testimonial=t.testimonial,rating=t.rating)
+        name = request.POST['name']
+        testimonial = request.POST['testimonial'] 
+        rating = request.POST ['rating']
+        Testimonial.objects.create(name = name,testimonial=testimonial,rating=rating)
         return redirect('/emp/home/')
-    return render(request, 'emp/testimonials.html')
+    return render(request, 'emp/testimonials.html', {})
 
 def feedback(request):
     # Feedbacks are only deleted from admin for that, goto admin/feebacks/delete manually
-    
     if request.method == 'POST':
         print('ok')
-        # name = request.POST['name'] 
-        f = Feedback()
-        f.name = request.POST.get('name')
-        f.message= request.POST.get('message')
-        
-        # feedback = request.POST['feedback']
-        Feedback.objects.create(name=f.name, message=f.message) 
+        name = request.POST['name'] 
+        message= request.POST['message']
+        Feedback.objects.create(name=name, message=message) 
         return redirect("/emp/home/")
-    return render(request, "emp/feedback.html",{})
+    return render(request, "emp/feedback.html")
+
+def update_emp(request):
+    if request.method == 'POST':
+        obj = Emp()
+        obj.name = request.POST['name']
+        obj.phone= request.POST['phone']
+        obj.save()
+        return redirect('/emp/home/')
+    return render(request, 'emp/update-emp.html', {})
+    
+        
+        
