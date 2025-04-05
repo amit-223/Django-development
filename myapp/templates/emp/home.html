@@ -16,22 +16,70 @@
   {% include 'emp/navbar.html' %}
   <style>
     .heading-style {
-      text-align: center;
-      margin: 1rem 0;
-      font-size: 2.5rem;
-      font-weight: 700;
-      background: linear-gradient(45deg, #007bff, #00ff88);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        {% comment %} text-transform: uppercase; {% endcomment %}
+        letter-spacing: 2px;
     }
   </style>
   <h1 class="heading-style">Employee Management App</h1>
   <!-- Main Content -->
 
   <h2 class="text-center my-3">List of Employees</h2>
-
   <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Add a responsive table wrapper -->
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% if emps %}
+                    {% for e in emps %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>{{ e.id }}</td>
+                      <td>{{ e.name }}</td>
+                      <td>{{ e.phone }}</td>
+                      <td>
+                        <!-- Stack buttons vertically on small screens -->
+                        <div class="d-flex flex-column flex-md-row gap-2">
+                          <a href="/emp/delete-emp/{{ e.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                          <a href="/emp/update-emp/{{ e.id }}" class="btn btn-primary btn-sm">Update</a>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  {% else %}
+                    <tr>
+                      <td colspan="5" class="text-center">No employees found.</td>
+                    </tr>
+                  {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% comment %} <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -55,8 +103,7 @@
                   <td>{{ e.phone }}</td>
                   <td>
                     <a href="/emp/delete-emp/{{ e.id }}" class="btn btn-danger">Delete</a>
-                    <!-- Uncomment the below button if Update functionality is implemented -->
-                     <a href="/emp/update-emp/" class="btn btn-primary">Update</a>
+                     <a href="/emp/update-emp/{{ e.id }}" class="btn btn-primary">Update</a>
                   </td>
                 </tr>
                 {% endfor %}
@@ -66,7 +113,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
             {% comment %} Show all feedbacks to Home {% endcomment %}
             <h3 class="text-center my-3">Feedbacks</h3>
             <div class="container">

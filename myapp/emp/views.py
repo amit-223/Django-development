@@ -1,5 +1,5 @@
 #Employee management Application
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Emp, Feedback, Testimonial
 
 def empfunc(request):
@@ -49,14 +49,14 @@ def feedback(request):
         return redirect("/emp/home/")
     return render(request, "emp/feedback.html")
 
-def update_emp(request):
+def update_emp(request, e_id):
+    emp = get_object_or_404(Emp, id= e_id)
     if request.method == 'POST':
-        obj = Emp()
-        obj.name = request.POST['name']
-        obj.phone= request.POST['phone']
-        obj.save()
+        emp.name = request.POST['name']
+        emp.phone= request.POST['phone']
+        emp.save()
         return redirect('/emp/home/')
-    return render(request, 'emp/update-emp.html', {})
+    return render(request, 'emp/update-emp.html', {'emp' : emp})
     
         
         
